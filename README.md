@@ -1,1 +1,1 @@
-# social_schedule
+# Social schedule
