@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  ss-api:
+    build: 
+      context: .
+      dockerfile: api/Dockerfile
+    command: npm start
+    ports:
+      - '3001:3001'
+    volumes:
+      - ss-api-node-modules:/opt/app/node_modules/
+      - .:/opt/app
+    networks:
+      - backend
+  ss-app:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    command: npm start
+    environment:
+      - APP_ENV=local
+    ports:
+      - '4200:4200'
+    volumes:
+      - ss-app-node-modules:/opt/app/node_modules/
+      - .:/opt/app
+    networks:
+      - backend
+    depends_on:
+       - ss-api
+volumes:
+  ss-api-node-modules:
+  ss-app-node-modules:
+networks:
+  backend:
+    driver: bridge

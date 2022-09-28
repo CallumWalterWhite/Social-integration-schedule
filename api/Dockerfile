@@ -1,11 +1,13 @@
-FROM node:16
 
-WORKDIR /usr/src/app
+FROM node:12.18.1
+ENV NODE_ENV=production
 
-COPY package*.json ./
+WORKDIR /opt/app
 
-RUN npm install
+COPY ["api/package.json", "api/package-lock.json*", "./"]
+
+RUN npm install --production
+
 COPY . .
 
-EXPOSE 3001
-CMD [ "node", "index.js" ]
+CMD [ "node", "server.js" ]
