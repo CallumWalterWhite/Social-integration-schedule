@@ -11,10 +11,12 @@
   "description": "",
   "dependencies": {
     "body-parser": "~1.18.2",
+    "crypto": "^1.0.1",
     "dinoloop": "~2.3.0",
     "express": "~4.16.3",
     "inversify": "~4.13.0",
     "jsonwebtoken": "^8.5.1",
+    "md5": "^2.3.0",
     "node-cron": "^3.0.0",
     "source-map-support": "~0.5.10",
     "sqlite3": "^5.1.1"

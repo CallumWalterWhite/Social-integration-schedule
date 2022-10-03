@@ -4,11 +4,12 @@ import express = require('express');
 import bodyParser = require('body-parser');
 import { Container } from 'inversify';
 import { Dino } from 'dinoloop';
-import { ProfileController } from './controllers/security.controller';
+import { SecurityController } from './controllers/security/security.controller';
 import { AppContainer } from './container/app.container';
 import { JsonResponse } from './middlewares/json.response';
 import { ApplicationErrorController } from './controllers/application.error.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
+import { DatabaseUpgradeMiddleware } from './middlewares/database.upgrade.service';
 
 const app = express();
 const port = process.env.PORT || 8088;
@@ -18,10 +19,11 @@ app.use(bodyParser.json());
 const dino = new Dino(app, '/api');
 
 dino.useRouter(() => express.Router());
-dino.registerController(ProfileController);
+dino.registerController(SecurityController);
 dino.registerApplicationError(ApplicationErrorController);
 dino.requestEnd(JsonResponse);
 dino.requestStart(AuthMiddleware);
+dino.requestStart(DatabaseUpgradeMiddleware);
 
 dino.dependencyResolver<Container>(AppContainer,
     (injector, type) => {
