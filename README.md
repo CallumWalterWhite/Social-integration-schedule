@@ -4,5 +4,5 @@
 Single platform that integrates with many social platforms (Linkedin, Facebook, Twitter, etc..).
 
 # Tech
-Express Dinoloop API \n
+Express Dinoloop API <br />
 React Web App
