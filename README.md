@@ -6,7 +6,7 @@ Single platform that integrates with many social platforms (Linkedin, Facebook, 
 # Features (upcoming)
  - Simple Config setup (add api keys, security, etc..) <br />
  - Create one post & then automatically share it across social platforms
- - Sechedule posts to go out for all platforms
+ - Schedule posts to go out for all platforms
 
 # Tech
 Express Dinoloop API <br />
