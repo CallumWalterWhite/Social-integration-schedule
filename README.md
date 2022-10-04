@@ -9,5 +9,5 @@ Single platform that integrates with many social platforms (Linkedin, Facebook, 
  - Schedule posts to go out for all platforms
 
 # Tech
-Express Dinoloop API <br />
-React Web App
+- Express Dinoloop API <br />
+- React Web App
