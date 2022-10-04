@@ -10,6 +10,7 @@ import { JsonResponse } from './middlewares/json.response';
 import { ApplicationErrorController } from './controllers/application.error.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
 import { DatabaseUpgradeMiddleware } from './middlewares/database.upgrade.service';
+import { SoSErrorMiddleware } from './middlewares/error.middleware';
 
 const app = express();
 const port = process.env.PORT || 8088;
@@ -24,6 +25,7 @@ dino.registerApplicationError(ApplicationErrorController);
 dino.requestEnd(JsonResponse);
 dino.requestStart(AuthMiddleware);
 dino.requestStart(DatabaseUpgradeMiddleware);
+dino.serverError(SoSErrorMiddleware);
 
 dino.dependencyResolver<Container>(AppContainer,
     (injector, type) => {

@@ -1,7 +1,9 @@
 import { injectable } from 'inversify';
-import { ApiController, Controller, HttpGet, SendsResponse, Async, BindNumber, HttpPost } from 'dinoloop';
+import { ApiController, Controller, HttpGet, SendsResponse, Async, BindNumber, HttpPost, Parse } from 'dinoloop';
 import { ISecurityService } from '../../services/security/isecurity.service';
 import { SecurityUser } from '../../model/security.user.model';
+import { toSecurityLogin } from '../../common/encrypt/handlers';
+import { SecurityLogin } from './security.login.model';
 const jwt = require('jsonwebtoken');
 
 @injectable()
@@ -17,11 +19,9 @@ export class SecurityController extends ApiController {
     }
     
     @HttpPost('/login')
-    login(): SecurityUser {
-        var profile: SecurityUser = this._securityService.get();
-        jwt.sign({profile},'secretkey',(err,token)=>{
-            profile._id=token;
-        })
-        return profile;
+    async login(@Parse(toSecurityLogin) securityLogin: SecurityLogin): Promise<string> {
+        let securityUser: SecurityUser = await this._securityService.login(securityLogin.email, securityLogin.password);
+        console.log(securityUser._jwt);
+        return securityUser._jwt;
     }
 }

@@ -1,11 +1,11 @@
 import { injectable } from 'inversify';
-import { RequestEndMiddleware } from 'dinoloop';
+import { RequestEndMiddleware, RequestEndMiddlewareAsync } from 'dinoloop';
 import { Request, Response, NextFunction } from 'express';
 
 @injectable()
-export class JsonResponse extends RequestEndMiddleware {
-    invoke(request: Request, response: Response, next: NextFunction, result: any): void {
-        response.json({
+export class JsonResponse extends RequestEndMiddlewareAsync {
+    invoke(request: any, response: any, next: any, result: any): Promise<void> {
+        return response.json({
             status: response.status,
             result: result
         });
